@@ -66,8 +66,7 @@ const save = (event) => {
   event.stopPropagation();
   try {
     setContactObject();
-    let contact = createContact();
-    alert(contact.toString());
+    createAndupdateStorage();
   } catch (error) {
     alert(error);
   }
@@ -81,6 +80,17 @@ const setContactObject = () => {
   contactObject._zip = getInputValueById('#zip');
   contactObject._phoneNumber = getInputValueById('#phoneNumber');
   contactObject._email = getInputValueById('#email');
+}
+
+const createAndupdateStorage = () => {
+  let addressBook = JSON.parse(localStorage.getItem("AddressBook"));
+  if (!addressBook) {
+    addressBook = [createContact()];
+  } else {
+    addressBook.push(createContact());
+  }
+  alert(addressBook.toString());
+  localStorage.setItem("AddressBook", JSON.stringify(addressBook));
 }
 
 const createContact = (id) => {
