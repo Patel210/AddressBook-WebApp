@@ -27,7 +27,59 @@
       </div>
     </div>
     <form class="form" action="#" onreset="resetForm()" onsubmit="save();return false">
+      <div class="row-content">
+        <label>Full Name</label>
+        <input type="name" class="input" required>
+        <error-output class="name-error" id="name-error" for="text"></error-output>
+      </div>
+      <div class="row-content">
+        <label>Address</label>
+        <input class="input" id="address" required>
+      </div>
+      <div class="row-content">
+        <div class="row-container">
+          <div class="row-container-item">
+            <label>City</label>
+            <select class="item" id="city" name="city" >
+              <option disabled selected hidden>Select City</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Jaipur">Jaipur</option>
+              <option value="New Delhi">New Delhi</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Bengaluru">Bengaluru</option>
+            </select>
+          </div>
+          <div class="row-container-item">
+            <label>State</label>
+            <select class="item" id="state" name="state">
+              <option disabled selected hidden>Select State</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="West Bengal">West Bengal</option>
+            </select>
+          </div>
+          <div class="row-container-item">
+            <label>Zip</label>
+            <input type="number" class="input item" id="zip" name="zip" required>
+          </div>
+        </div>
+      </div>
+      <div class="row-content">
+        <label>Phone Number</label>
+        <input type="tel" class="input" id="tel" name="tel" required>
+      </div>
+      <div class="row-content">
+        <label>Email</label>
+        <input type="email" class="input" id="email" name="email" required>
+      </div>
     </form>
+  </div>
 </body>
 
 </html>
