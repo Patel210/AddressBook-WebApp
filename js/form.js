@@ -4,43 +4,60 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const nameError = document.querySelector('.name-error');
   name.addEventListener('input', function () {
     if (name.value.length == 0) {
-      nameError.textContent = "";
+      setTextValue('.name-error', "");
       return;
     }
-
-    let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}([\\s][A-Z]{1}[a-z]{2,}){0,2}$');
-    if (nameRegex.test(name.value)) {
-      nameError.textContent = "";
-    } else nameError.textContent = "Invalid Name!";
+    try {
+      (new Contact()).name = name.value;
+      setTextValue('.name-error', "");
+    } catch (error) {
+      setTextValue('.name-error', error);
+    }
   });
 
   const address = document.querySelector('#address');
   const addressError = document.querySelector('.address-error');
   address.addEventListener('input', function () {
     if (address.value.length == 0) {
-      addressError.textContent = "";
+      setTextValue('.address-error', "");
       return;
     }
-    let addressRegex = RegExp('^[A-Za-z0-9,\\.]{3,}([\\s][A-Za-z0-9,\\.]{3,}){0,}$');
-    if (addressRegex.test(address.value)) {
-      addressError.textContent = "";
+    try {
+      (new Contact()).address = address.value;
+      setTextValue('.address-error', "");
+    } catch (error) {
+      setTextValue('.address-error', error);
     }
-    else addressError.textContent = "Invalid Address!";
+  });
+
+  const zip = document.querySelector('#zip');
+  const zipError = document.querySelector('.zip-error');
+  zip.addEventListener('input', function () {
+    if (zip.value.length == 0) {
+      setTextValue('.zip-error', "");
+      return;
+    }
+    try {
+      (new Contact()).zip = zip.value;
+      setTextValue('.zip-error', "");
+    } catch (error) {
+      setTextValue('.zip-error', error);
+    }
   });
 
   const phoneNumber = document.querySelector('#phoneNumber');
   const phoneNumberError = document.querySelector('.phoneNumber-error');
   phoneNumber.addEventListener('input', function () {
     if (phoneNumber.value.length == 0) {
-      phoneNumberError.textContent = "";
+      setTextValue('.phoneNumber-error', "");
       return;
     }
-
-    let phoneNumberRegex = RegExp('^(([+])?[0-9]{2}[\\s]){0,1}[1-9]{1}[0-9]{9}$');
-    if (phoneNumberRegex.test(phoneNumber.value)) {
-      phoneNumberError.textContent = "";
+    try {
+      (new Contact()).phoneNumber = phoneNumber.value;
+      setTextValue('.phoneNumber-error', "");
+    } catch (error) {
+      setTextValue('.phoneNumber-error', error);
     }
-    else phoneNumberError.textContent = "Invalid Phone Number!";
   });
 });
 
@@ -49,6 +66,8 @@ const save = (event) => {
   event.stopPropagation();
   try {
     setContactObject();
+    let contact = createContact();
+    alert(contact.toString());
   } catch (error) {
     alert(error);
   }
@@ -64,7 +83,60 @@ const setContactObject = () => {
   contactObject._email = getInputValueById('#email');
 }
 
+const createContact = (id) => {
+  let contact = new Contact();
+  if (!id) contact.id = createNewContactID();
+  else contact.id = id;
+  setContactData(contact);
+  return contact;
+}
+
+setContactData = (contact) => {
+  try {
+    contact.name = contactObject._name;
+  } catch (error) {
+    setTextValue('.name-error', error);
+    throw error;
+  }
+
+  try {
+    contact.address = contactObject._address;
+  } catch (error) {
+    setTextValue('.address-error', error);
+    throw error;
+  }
+
+  contact.city = contactObject._city;
+  contact.state = contactObject._state;
+
+  try {
+    contact.zip = contactObject._zip;
+  } catch (error) {
+    setTextValue('.zip-error', error);
+    throw error;
+  }
+  try {
+    contact.phoneNumber = contactObject._phoneNumber;
+  } catch (error) {
+    setTextValue('.phoneNumber-error', error);
+    throw error;
+  }
+  contact.email = contactObject._email;
+}
+
 const getInputValueById = (id) => {
   let value = document.querySelector(id).value;
   return value;
+}
+
+const setTextValue = (id, value) => {
+  const element = document.querySelector(id);
+  element.textContent = value;
+}
+
+const createNewContactID = () => {
+  let contactID = localStorage.getItem("ContactID");
+  contactID = !contactID ? 1 : (parseInt(contactID) + 1).toString();
+  localStorage.setItem("ContactID", contactID);
+  return contactID;
 }
