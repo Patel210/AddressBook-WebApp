@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       (new Contact()).name = name.value;
       setTextValue('.name-error', "");
     } catch (error) {
+      alert('here')
       setTextValue('.name-error', error);
     }
   });
@@ -62,15 +63,36 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 const save = (event) => {
+  if (anyError()) {
+    alert("Cannot submit the form!");
+    return;
+  }
+
   event.preventDefault();
   event.stopPropagation();
   try {
     setContactObject();
     createAndupdateStorage();
+    resetForm();
+    window.location.replace(site_properties.home_page);
   } catch (error) {
     alert(error);
   }
 };
+
+const resetForm = () => {
+  setValue('#name', '');
+  setTextValue('.name-error', "");
+  setValue('#address', '');
+  setTextValue('.address-error', "");
+  setSelectedIndex('#city', 0);
+  setSelectedIndex('#state', 0);
+  setValue('#zip', '');
+  setTextValue('.zip-error', "");
+  setValue('#phoneNumber', '');
+  setTextValue('.phoneNumber-error', "");
+  setValue('#email', '');
+}
 
 const setContactObject = () => {
   contactObject._name = getInputValueById('#name');
@@ -101,7 +123,7 @@ const createContact = (id) => {
   return contact;
 }
 
-setContactData = (contact) => {
+const setContactData = (contact) => {
   try {
     contact.name = contactObject._name;
   } catch (error) {
@@ -149,4 +171,23 @@ const createNewContactID = () => {
   contactID = !contactID ? 1 : (parseInt(contactID) + 1).toString();
   localStorage.setItem("ContactID", contactID);
   return contactID;
+}
+
+const setValue = (id, value) => {
+  const element = document.querySelector(id);
+  element.value = value;
+}
+
+const setSelectedIndex = (id, index) => {
+  const element = document.querySelector(id);
+  element.selectedIndex = index;
+}
+
+const anyError = () => {
+ if (document.querySelector('.name-error').textContent == '' || 
+     document.querySelector('.name-error').textContent == '' || 
+     document.querySelector('.name-error').textContent == '' || 
+     document.querySelector('.name-error').textContent == '') {
+   return false;
+  } else return true;
 }
