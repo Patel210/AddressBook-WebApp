@@ -39,3 +39,53 @@ html body {
 .book-text { color: #42515f}
 
 * {box-sizing: border-box;}
+
+.form-content {
+  margin-top: 20px;
+  min-height: calc(100% - 80px);
+  background-color: #f7f7f7;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-header {
+  width: 65%;
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  background:  #008CFF 0% 0% no-repeat padding-box;
+  border: 1px solid #008CFF;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 8px 8px 0px 0px ;
+  opacity: 1;
+}
+
+.form-head {
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font: normal normal bold 24px/25px Roboto; 
+  margin-left: 33%;
+}
+
+.cancelLogo {
+  margin-top: 5px;
+  cursor: pointer;
+  margin-left: 250px;
+}
+
+.form {
+  width: 65%;
+  padding: 44px 60px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px grey;
+  border: 1px solid #008CFF;
+  border-radius: 0px 0px 8px 8px;
+}
