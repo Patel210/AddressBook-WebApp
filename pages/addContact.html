@@ -26,7 +26,7 @@
         <a href="./HomePage.html" class="cancelButton"><img src="../assets/cancel logo.png" alt=""></a>
       </div>
     </div>
-    <form class="form" action="#" onreset="resetForm()" onsubmit="save();return false">
+    <form class="form" action="#" onreset="resetForm()" onsubmit="save(event);return false">
       <div class="row-content">
         <label>Full Name</label>
         <div class="input-error">
@@ -90,6 +90,12 @@
         <div class="input-error">
           <input type="email" class="input" id="email" name="email" required>
           <error-output class="email-error" id="email-error" for="email"></error-output>
+        </div>
+      </div>
+      <div class="buttonParent">
+        <div class="submit-reset">
+          <button type="submit" class="button submitButton" id="submitButton">Add</button>
+          <button type="reset" class="resetButton button">Reset</button>
         </div>
       </div>
     </form>
