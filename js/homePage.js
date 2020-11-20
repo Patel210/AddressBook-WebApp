@@ -28,7 +28,7 @@ const createInnerHTML = () => {
         <td>${contact._zip}</td>
         <td>${contact._phoneNumber}</td>
         <td>${contact._email}</td>
-        <td>
+        <td class="action-items">
           <img id="${contact._id}" onclick="remove(this)" alt="delete" 
                     src="../assets/delete-black-18dp.svg">
           <img id="${contact._id}" onclick="update(this)" alt="edit" 
