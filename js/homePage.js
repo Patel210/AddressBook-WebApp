@@ -56,3 +56,12 @@ const remove = (node) => {
   document.querySelector(".person-count").textContent = addressBook.length;
   createInnerHTML();
 }
+
+const update = (node) => {
+  let contact = addressBook.find(contactObj => contactObj._id == node.id);
+  if (!contact) {
+    return;
+  }
+  localStorage.setItem("editPerson", JSON.stringify(contact));
+  window.location.replace(site_properties.addContact_page);
+}

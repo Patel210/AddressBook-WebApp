@@ -1,3 +1,4 @@
+let isUpdate = false;
 let contactObject = {};
 window.addEventListener('DOMContentLoaded', (event) => {
   const name = document.querySelector('#name');
@@ -59,7 +60,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
       setTextValue('.phoneNumber-error', error);
     }
   });
+  checkForUpdate();
 });
+
+const checkForUpdate = () => {
+  const contact = localStorage.getItem('editPerson');
+  isUpdate = contact ? true : false;
+  if (!isUpdate) {
+    return;
+  }
+  contactObject = JSON.parse(contact);
+  setForm();
+}
 
 const save = (event) => {
   if (anyError()) {
@@ -78,6 +90,16 @@ const save = (event) => {
     alert(error);
   }
 };
+
+const setForm = () => {
+  setValue('#name', contactObject._name);
+  setValue('#address', contactObject._address);
+  setValue('#city', contactObject._city);
+  setValue('#state', contactObject._state);
+  setValue('#zip', contactObject._zip);
+  setValue('#phoneNumber', contactObject._phoneNumber);
+  setValue('#email', contactObject._email);
+}
 
 const resetForm = () => {
   setValue('#name', '');
