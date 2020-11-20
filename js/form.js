@@ -11,7 +11,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       (new Contact()).name = name.value;
       setTextValue('.name-error', "");
     } catch (error) {
-      alert('here')
       setTextValue('.name-error', error);
     }
   });
