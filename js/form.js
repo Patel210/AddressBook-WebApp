@@ -78,7 +78,6 @@ const save = (event) => {
     alert("Cannot submit the form!");
     return;
   }
-
   event.preventDefault();
   event.stopPropagation();
   try {
@@ -130,9 +129,15 @@ const createAndupdateStorage = () => {
   if (!addressBook) {
     addressBook = [createContact()];
   } else {
-    addressBook.push(createContact());
+    let contact = addressBook.find(contactObj => contactObj._id == contactObject._id);
+    if (!contact) {
+      addressBook.push(createContact());
+    } else {
+      const index = addressBook.map(contactObj => contactObj._id)
+                               .indexOf(contact._id);
+      addressBook.splice(index, 1, createContact(contact._id));
+    }
   }
-  alert(addressBook.toString());
   localStorage.setItem("AddressBook", JSON.stringify(addressBook));
 }
 
