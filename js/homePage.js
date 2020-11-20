@@ -42,3 +42,17 @@ const createInnerHTML = () => {
 const getContactsFromLocalStorage = () => {
   return localStorage.getItem('AddressBook') ? JSON.parse(localStorage.getItem('AddressBook')) : [];
 }
+
+const remove = (node) => {
+  let contact = addressBook.find(contactObj => contactObj._id == node.id);
+  if (!contact) {
+    return;
+  }
+  const index = addressBook
+                .map(contactObj => contactObj._id)
+                .indexOf(contact._id);
+  addressBook.splice(index, 1);
+  localStorage.setItem("AddressBook", JSON.stringify(addressBook));
+  document.querySelector(".person-count").textContent = addressBook.length;
+  createInnerHTML();
+}
