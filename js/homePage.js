@@ -1,6 +1,6 @@
 let addressBook;
 window.addEventListener('DOMContentLoaded', (event) => {
-  addressBook = getContactsFromJSONArray();
+  addressBook = getContactsFromLocalStorage();
   document.querySelector(".person-count").textContent = addressBook.length;
   createInnerHTML();
 });
@@ -39,28 +39,6 @@ const createInnerHTML = () => {
   document.querySelector('#table-display').innerHTML = innerHtml;
 };
 
-const getContactsFromJSONArray = () => {
-  let contacts = [
-    {
-      _id: 1,
-      _name: "Vaishali Sharma",
-      _address: "Santa Cruz",
-      _city: "Mumbai",
-      _state: "Maharashtra",
-      _zip: 200134,
-      _phoneNumber: "+91 9089671234",
-      _email: "vaishali.sharma@gmail.com"
-    },
-    {
-      _id: 2,
-      _name: "Vishal Gupta",
-      _address: "Malta Road",
-      _city: "Jaipur",
-      _state: "Rajasthan",
-      _zip: 300134,
-      _phoneNumber: "+91 9089671232",
-      _email: "vishal.gupta@gmail.com"
-    }
-  ]
-  return contacts;
+const getContactsFromLocalStorage = () => {
+  return localStorage.getItem('AddressBook') ? JSON.parse(localStorage.getItem('AddressBook')) : [];
 }
